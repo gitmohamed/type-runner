@@ -92,6 +92,10 @@
   box-shadow: 1px -1px 1px #4646464a;
 }
 
+.reset_button:disabled {
+  color: #6a6a6a;
+}
+
 .result_button {
   margin: 25px auto;
   display: block;

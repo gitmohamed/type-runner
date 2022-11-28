@@ -48,7 +48,7 @@ function Home() {
     }
 
     // document.querySelector(`.charLi[value='${currentIndex}']`).classList.add('current')
-    console.log(currentIndex)
+    // console.log(currentIndex)
     setCurrentIndex(currentIndex => currentIndex + 1)
   }
 
@@ -69,7 +69,7 @@ function Home() {
   }
 
   const calculateLineCount = (textCount) => {
-    return textCount % 66;
+    return textCount % 111;
   }
 
   const Watch = () => {
@@ -215,11 +215,11 @@ function Home() {
 
     switch (difficulty) {
       case 'Medium':
-        return [Math.round(wordCount / 2), accuracy, completionPercentage]
+        return [Math.round(wordCount / 2) + 1, accuracy, completionPercentage]
       case 'Hard':
-        return [Math.round(wordCount / 3), accuracy, completionPercentage]
+        return [Math.round(wordCount / 3) + 1, accuracy, completionPercentage]
       default:
-        return [Math.round(wordCount), accuracy, completionPercentage]
+        return [Math.round(wordCount) + 1, accuracy, completionPercentage]
     }
   }
 
@@ -228,12 +228,12 @@ function Home() {
       if (e.key !== 'Backspace') {
         if (calculateLineCount(e.currentTarget.value.length) === 0) {
           document.body.querySelector('.char_table').style.top =
-            parseFloat(document.body.querySelector('.char_table').style.top.split('ch')[0]) - 1.4 + 'ch'
+            parseFloat(document.body.querySelector('.char_table').style.top.split('ch')[0]) - 1.2 + 'ch'
         }
       } else {
         if (calculateLineCount(e.currentTarget.value.length) === 1) {
           document.body.querySelector('.char_table').style.top =
-            parseFloat(document.body.querySelector('.char_table').style.top.split('ch')[0]) + 1.4 + 'ch'
+            parseFloat(document.body.querySelector('.char_table').style.top.split('ch')[0]) + 1.2 + 'ch'
         }
       }
     }
