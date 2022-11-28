@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[![Netlify Status](https://api.netlify.com/api/v1/badges/978cc4f8-f024-4501-a7bf-e0acad3425e4/deploy-status)](https://app.netlify.com/sites/effortless-croquembouche-3b8bed/deploys)
+# DevProjects - Speed typing game
 
+This is an open source project from [DevProjects](http://www.codementor.io/projects). Feedback and questions are welcome!
+Find the project requirements here: [Speed typing game](https://www.codementor.io/projects/web/speed-typing-game-c51led1afn)
+
+## Tech/framework used
+Built with ReactJS and Vite
+
+## Screenshots and demo
+[https://effortless-croquembouche-3b8bed.netlify.app/](https://effortless-croquembouche-3b8bed.netlify.app/)
+
+<!-- GETTING STARTED -->
 ## Getting Started
 
-First, run the development server:
+Type Runner is speed typing game made with React and Vite.js. Hosted to Firebase.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* [Download Node.js](https://nodejs.org/)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Installation
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+_To install/clone this app follow the steps below._
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Clone the repo
 
-## Learn More
+   ```sh
+   git clone https://github.com/gitmohamed/type-runner.git
+   ```
+2. Install NPM packages
 
-To learn more about Next.js, take a look at the following resources:
+   ```sh
+   cd type-runner/
+   yarn
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   OR
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   npm install
+   ```
+3. Run the program by typing
+   ```sh
+   yarn dev
 
-## Deploy on Vercel
+   OR
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [ ] Separate out component methods in to separate files
+- [ ] Word wrap display text
+
+
+See the [open issues](https://github.com/gitmohamed/type-runner/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#top">back to top</a>)</p>
