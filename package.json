@@ -9,10 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
+    "express": "3.2.0",
+    "express-session": "^1.17.3",
+    "fs": "^0.0.1-security",
+    "less-middleware": "2.0.1",
+    "lodash": "2.4.1",
     "next": "13.0.5",
+    "randy": "^1.5.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sentencer": "*"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.25",
+    "typescript": "4.9.3"
   }
 }

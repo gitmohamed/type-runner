@@ -1,0 +1,297 @@
+#App {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+#portal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,0.8);
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+}
+
+#portal .container {
+  display: grid;
+}
+
+.modal {
+  position: relative;
+  border: 1px solid #ffeb3b;
+  border-radius: 2.5ch;
+  padding: 2rem 5rem 25px 2rem;
+  background: #fff;
+  text-align: left;
+  color: #242424;
+  scale: 1.2;
+}
+
+.modal_title {
+  margin: 10px 0px;
+  color: #e5e5e5;
+}
+
+.modal button {
+  position: absolute;
+  right: 0.3rem;
+  top: 0.3rem;
+  width: auto;
+  background: #78002900;
+  color: rgb(0 0 0);
+  font-family: inherit;
+  font-weight: 600;
+  border: 0px solid #d2d2d2;
+  padding: 0.5rem 2rem;
+  line-height: 3ch;
+  font-size: 2ch;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: -1px 1px 1px #4646464a;
+  border-radius: 3ch;
+  transition: text-shadow 0.15s ease-in-out, color 0.1s ease-in-out;
+}
+
+.modal button:hover {
+  text-shadow: 0 2px 12px rgb(116, 188, 255);
+  color: #222;
+}
+
+.modal button:active {
+  box-shadow: 1px -1px 1px #4646464a;
+}
+
+.reset_button {
+  right: 0.3rem;
+  top: 0.3rem;
+  width: auto;
+  background: #78002900;
+  color: #e5e5e5;
+  font-family: inherit;
+  font-weight: 600;
+  border: 0px solid #d2d2d2;
+  padding: 0.5rem 2rem;
+  line-height: 3ch;
+  font-size: 2ch;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: -1px 1px 1px #4646464a;
+  border-radius: 3ch;
+  transition: text-shadow 0.15s ease-in-out, color 0.1s ease-in-out;
+}
+
+.reset_button:active {
+  box-shadow: 1px -1px 1px #4646464a;
+}
+
+.result_button {
+  width: 100%;
+  margin: 15px auto;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.result_button:hover {
+  color: #2196F3;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+.type_form {
+  overflow-y: hidden;
+  font-size: 16px;
+  /* width: 950px; */
+  height: 33ch;
+  box-shadow: inset 0px -20ch 2rem -3rem #242424;
+  position: relative;
+}
+
+.char_table {
+  position: absolute;
+  display: flex;
+  gap: 0.5ch 0;
+  padding-top: 1rem;
+  z-index: -1;
+  font-size: 3ch;
+  flex-direction: row;
+  flex-wrap: wrap;
+  transition: top 0.3s ease-in-out;
+}
+
+.charLi {
+  margin: 0;
+  color: rgb(146 146 146);
+  display: inline-block;
+  min-width: 6px;
+  text-align: center;
+}
+
+.areaText {
+  background: #111;
+  border: 0;
+  position: fixed;
+  left: 0;
+  padding: 1rem;
+  margin-top: 0;
+  bottom: 0;
+  outline: none;
+  caret-color: aquamarine;
+  z-index: 3;
+  font-size: 3ch;
+  font-family: inherit;
+  color: rgb(255 255 255 / 82%);
+  appearance: none;
+  width: 100%;
+  resize: none;
+  /* height: 160px; */
+}
+
+.areaText::selection {
+  background: aquamarine;
+  color: #212121;
+}
+
+.difficulty_form {
+  justify-content: center;
+  display: flex;
+}
+
+.diff_option {
+  padding: 1.1rem 2.5rem;
+  border-radius: 2rem;
+  margin: 11px;
+  border: 1px solid #6e6e6e;
+  cursor: pointer;
+  text-align: right;
+  position: relative;
+}
+
+.diff_option:hover {
+  background-color: #212121;
+}
+
+.diff_option input {
+  appearance: none;
+}
+
+.diff_option input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.checkmark {
+  position: absolute;
+  left: 16px;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.diff_option:has(input:checked) {
+  color: white;
+}
+
+.diff_option input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.diff_option input ~ .checkmark {
+  background-color: rgba(204, 204, 204, 0.517);
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+@media screen and (max-width: 1000px) {
+  .char_table {
+    font-size: 3.5vw;
+    gap: 0.3ch 0;
+  }
+
+  .type_form {
+    width: 90vw;
+  }
+
+  #root {
+    padding: 1rem;
+  }
+
+  .diff_option {
+    margin: 8px auto;
+    text-align: center;
+    width: 15rem;
+    padding: 0.7rem 1.5rem;
+  }
+
+  .checkmark {
+    top: 15px;
+    left: 11px;
+    height: 16px;
+    width: 16px;
+  }
+
+  .checkmark:after {
+    top: 4.2px;
+    left: 4.2px;
+  }
+  .difficulty_form {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .diff_option {
+    width: 70%;
+  }
+}
