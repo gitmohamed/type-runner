@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import ReactDOM from 'react-dom'
-
+import loader from '../public/loader.svg'
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -14,7 +14,7 @@ function Home() {
   const [difficulty, setDifficulty] = useState('Easy')
   const [showModal, setShowModal] = useState(false)
   const [score, setScore] = useState([0, 0, 0])
-  const [isProduction, setIsProduction] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const areaRef = useRef(null)
 
   const checkAgainstSampleText = (text) => {
@@ -47,19 +47,21 @@ function Home() {
       beginIndex++;
     }
 
-    document.querySelector(`.charLi[value='${currentIndex}']`).classList.add('current')
+    // document.querySelector(`.charLi[value='${currentIndex}']`).classList.add('current')
+    console.log(currentIndex)
     setCurrentIndex(currentIndex => currentIndex + 1)
   }
 
-  const GenerateParagraph = (paragraphCount) => {
+  const GenerateParagraph = async (paragraphCount) => {
     try {
-        return fetch(`/api/paragraphs?paragraphs=${paragraphCount}`)
-        .then((data) => {
-          console.log(data)
-            return data.text();
-        }).then((text) => {
-            setDisplayText(text);
-        })
+      setIsLoading(true)
+      return await fetch(`/api/paragraphs?paragraphs=${paragraphCount}`)
+      .then((data) => {
+          return data.text();
+      }).then((text) => {
+          setDisplayText(text);
+          setIsLoading(false)
+      })
     } catch (error) {
         console.error(error)
         return error;
@@ -245,6 +247,10 @@ function Home() {
     return <a className='result_button' onClick={toggleResults}>Results</a>
   }
 
+  const Loader = () => {
+    return <Image src={loader} alt="loading" id='loading' />
+  }
+
   return (
     <div id={'App'}>
       <Difficulty />
@@ -255,7 +261,7 @@ function Home() {
       <br />
       <form className={'type_form'} action="#" onClick={(e) => areaRef.current.focus()}>
         <ul className={'char_table'} style={{ top: '0ch' }}>
-          {splitText(displayText).map((char, i) => {
+          {isLoading ? <Loader /> : splitText(displayText).map((char, i) => {
             return <li className={'charLi'} key={`${char}-${i}`} value={i}>{char}</li>
           })}
         </ul>
