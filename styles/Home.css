@@ -68,8 +68,6 @@
 }
 
 .reset_button {
-  right: 0.3rem;
-  top: 0.3rem;
   width: auto;
   background: #78002900;
   color: #e5e5e5;
@@ -91,9 +89,8 @@
 }
 
 .result_button {
-  width: 100%;
   margin: 15px auto;
-  display: inline-block;
+  display: block;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -178,7 +175,7 @@
   appearance: none;
   width: 100%;
   resize: none;
-  /* height: 160px; */
+  height: 260px;
 }
 
 .areaText::selection {

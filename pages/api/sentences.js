@@ -10,9 +10,9 @@ function handler(req, res) {
   sentenceStream._read = function () {
     count++;
 
-    if (count === 1) {
-      sentenceStream.push('{"text":"');
-    }
+    // if (count === 1) {
+    //   sentenceStream.push('{"text":"');
+    // }
 
     var last = (count === constrain(num, 12));
 
@@ -28,10 +28,10 @@ function handler(req, res) {
   // } else {
   //   res.setHeader("Content-Type", "text/plain");
   // }
-  // res.setHeader("Content-Type", "text/plain");
+  res.setHeader("Content-Type", "text/plain");
 
   sentenceStream.pipe(res);
-  return res.status(200).json({ text: sentenceStream })
+  return res.status(200);
 }
 
 function constrain(input, max) {

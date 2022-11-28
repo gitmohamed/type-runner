@@ -55,6 +55,7 @@ function Home() {
     try {
         return fetch(`/api/paragraphs?paragraphs=${paragraphCount}`)
         .then((data) => {
+          console.log(data)
             return data.text();
         }).then((text) => {
             setDisplayText(text);
@@ -88,7 +89,7 @@ function Home() {
 
   useEffect(() => {
     GenerateParagraph(difficulty === 'Easy' ? 2 : difficulty === 'Hard' ? 4 : 3)
-  }, [setDisplayText])
+  }, [])
 
   // watch tick - every 1000ms
   useEffect(() => {

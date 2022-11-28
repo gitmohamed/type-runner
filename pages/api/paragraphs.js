@@ -3,7 +3,7 @@ import Sentencer from 'sentencer';
 import randy from 'randy';
 
 async function handler(req, res) {
-  var paragraphsCount = req.query.paragraphs || 2;
+  var paragraphsCount = req.query.paragraphs || 1;
   var sentenceCount = req.query.sentences || randy.randInt(3, 6);
   // var pTag = !!req.query;
 
@@ -62,12 +62,22 @@ async function handler(req, res) {
   res.setHeader("Content-Type", "text/plain");
 
   paragraphStream.pipe(res);
-  return await res.status(200).send(paragraphStream);
+  return await res.status(200);
 }
   
 function constrain(input, max) {
   return Math.min(input, max);
 }
+
+function generate(numberOfSentences) {
+  var sentences = "";
+  for(var i = 0; i < numberOfSentences; i++) {
+    sentences += capitalizeFirstLetter( randomStartingPhrase() + makeSentenceFromTemplate()) + ".";
+    sentences += (numberOfSentences > 1) ? " " : "";
+  }
+  return sentences;
+}
+
   
 function generateSentenceForStream(last) {
     // make a sentence. perhaps it has a starting phrase.
