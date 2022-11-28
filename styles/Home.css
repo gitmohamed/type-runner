@@ -52,18 +52,34 @@
   font-family: inherit;
   font-weight: 600;
   border: 0px solid #d2d2d2;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1.5rem;
   line-height: 3ch;
   font-size: 2ch;
   cursor: pointer;
+  display: flex;
   font-family: inherit;
   box-shadow: -1px 1px 1px #4646464a;
   border-radius: 3ch;
   transition: text-shadow 0.15s ease-in-out, color 0.1s ease-in-out;
 }
 
+.modal button i {
+  display: block;
+  height: 16px;
+  width: 0.5px;
+  background-color: #111;
+}
+
+.modal button i:nth-child(1) {
+  rotate: 45deg;
+  
+}
+.modal button i:nth-child(2) {
+  rotate: -45deg;
+
+}
+
 .modal button:hover {
-  text-shadow: 0 2px 12px rgb(116, 188, 255);
   color: #222;
 }
 

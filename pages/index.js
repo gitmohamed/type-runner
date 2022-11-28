@@ -194,7 +194,10 @@ function Home() {
     return ReactDOM.createPortal(
       <div className={'container'} ref={modalRef} onClick={closeModal}>
         <div className={'modal'}>
-          <button onClick={() => setShowModal(false)}>X</button>
+          <button onClick={() => setShowModal(false)}>
+            <i />
+            <i />
+          </button>
           <h2>Results:</h2>
           Words per minute: <b style={{color: '#673ab7'}}>{score[0]}</b> <br />
           Accuracy: <b style={{color: score[1] > 90 ? '#14bf1b' : '#ff9800'}}>{score[1]}% </b><br />
