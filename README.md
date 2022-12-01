@@ -1,4 +1,6 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/978cc4f8-f024-4501-a7bf-e0acad3425e4/deploy-status)](https://app.netlify.com/sites/effortless-croquembouche-3b8bed/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/978cc4f8-f024-4501-a7bf-e0acad3425e4/deploy-status)](https://app.netlify.com/sites/typerunner/deploys)
+
+
 # DevProjects - Speed typing game
 
 This is an open source project from [DevProjects](http://www.codementor.io/projects). Feedback and questions are welcome!
@@ -8,7 +10,7 @@ Find the project requirements here: [Speed typing game](https://www.codementor.i
 Built with ReactJS and NextJS
 
 ## Screenshots and demo
-[![Type Runner Demo][type-runner]](https://effortless-croquembouche-3b8bed.netlify.app/)
+[![Type Runner Demo][type-runner]](https://typerunner.netlify.app/)
 
 <!-- GETTING STARTED -->
 ## Getting Started
