@@ -26,30 +26,44 @@ function Home() {
       // color the index background *GREEN for a match & *RED for mismatch
       if (displayText[beginIndex] === text[beginIndex]) {
         if (displayText[beginIndex] === ' ') {
-          document.querySelector(`.charLi[value='${beginIndex}']`).style.backgroundColor = 'transparent'; // default - transparent
+          document.querySelector(`.charLi[value='${beginIndex}']`).style.backgroundColor = 'transparent'; // default - transparent background
         }
         // character match
-        document.querySelector(`.charLi[value='${beginIndex}']`).style.color = 'rgb(70 201 75)'; // green
+        document.querySelector(`.charLi[value='${beginIndex}']`).animate(
+          { color: 'rgb(70 201 75)' }, 
+          { duration: 150, fill: "forwards", iterations: 5 })
+        // document.querySelector(`.charLi[value='${beginIndex}']`).style.color = 'rgb(70 201 75)'; // green
       } else if (text[beginIndex] !== displayText[beginIndex]) {
         // not a character match
         if (!text[beginIndex]) {
           if (displayText[beginIndex] === ' ') {
             document.querySelector(`.charLi[value='${beginIndex}']`).style.backgroundColor = 'transparent';
           }
-          document.querySelector(`.charLi[value='${beginIndex}']`).style.color = 'rgba(255, 255, 255, 0.5)'; // default - grey
+          document.querySelector(`.charLi[value='${beginIndex}']`).animate(
+            { color: 'rgba(255, 255, 255, 0.5)' }, 
+            { duration: 150, fill: "forwards", iterations: 5 })
+          // document.querySelector(`.charLi[value='${beginIndex}']`).style.color = 'rgba(255, 255, 255, 0.5)'; // default - grey
         } else {
           if (displayText[beginIndex] === ' ') {
-            document.querySelector(`.charLi[value='${beginIndex}']`).style.backgroundColor = 'rgb(179 45 45)'; //red
+            document.querySelector(`.charLi[value='${beginIndex}']`).style.backgroundColor = 'rgb(179 45 45)'; //red background
           }
-          document.querySelector(`.charLi[value='${beginIndex}']`).style.color = 'rgb(179 45 45)'; // red 
+          
+          document.querySelector(`.charLi[value='${beginIndex}']`).animate(
+            { color: 'rgb(179 45 45)' }, 
+            { duration: 150, fill: "forwards", iterations: 5 })
+          // document.querySelector(`.charLi[value='${beginIndex}']`).style.color = 'rgb(179 45 45)'; // red 
         }
       }
       beginIndex++;
     }
-
+    document.querySelectorAll(`.charLi:not([value='${areaRef.current.value.length}'])`).forEach(li => {
+      li.classList.remove("current")
+    });
+    document.querySelector(`.charLi[value='${areaRef.current.value.length}']`).classList.add("current");
+    // document.querySelector(`.charLi[value='${areaRef.current.value.length}']`).animate(
+    //   { backgroundColor: ['rgba(255, 255, 255, 0.6)', 'transparent'] }, 
+    //   { duration: 150, fill: "forwards", iterations: 5 })
     // document.querySelector(`.charLi[value='${currentIndex}']`).classList.add('current')
-    // console.log(currentIndex)
-    setCurrentIndex(currentIndex => currentIndex + 1)
   }
 
   const GenerateParagraph = async (paragraphCount) => {
@@ -80,6 +94,10 @@ function Home() {
     return text.split('');
   }
 
+  useEffect(() => {
+    // console.log(currentIndex)
+  }, [currentIndex])
+
   const startTimer = () => {
     // create timer interval[timeInterval] and start timer
     setTimerStarted(true)
@@ -91,10 +109,28 @@ function Home() {
 
   useEffect(() => {
     GenerateParagraph(difficulty === 'Easy' ? 2 : difficulty === 'Hard' ? 4 : 3)
-  }, [])
+  }, [difficulty])
 
   // watch tick - every 1000ms
   useEffect(() => {
+    const charMatchCount = () => {
+      return areaRef.current.value.split('').filter((char, i) => { return char === displayText[i] }).length
+    }
+
+    const calculateScore = () => {
+      const wordCount = (areaRef.current.value.match(/\s/g) || []).length;
+      const completionPercentage = Math.round((charMatchCount() / displayText.length) * 100);
+      const accuracy = Math.round((charMatchCount() / areaRef.current.value.length) * 100)
+
+      switch (difficulty) {
+        case 'Medium':
+          return [Math.round(wordCount / 2) + 1, accuracy, completionPercentage]
+        case 'Hard':
+          return [Math.round(wordCount / 3) + 1, accuracy, completionPercentage]
+        default:
+          return [Math.round(wordCount) + 1, accuracy, completionPercentage]
+      }
+    }
     // timer ran out!
     if (timeInterval && timer < 1) {
       setTimerStarted(false)
@@ -108,7 +144,7 @@ function Home() {
       return;
     };
     setWatch(`0${Math.floor(timer / 1000 / 60) % 60} : ${Math.floor(timer / 1000) % 60 < 10 ? '0' : ''}${Math.floor(timer / 1000) % 60}`)
-  }, [timer])
+  }, [timer, timeInterval])
 
   const Reset = () => {
     const resetHandler = () => {
@@ -144,6 +180,7 @@ function Home() {
     areaRef.current.value = '';
     areaRef.current.focus();
     setScore([0, 0])
+    setCurrentIndex(0)
     document.querySelector('.char_table').style.top = '0ch'
     document.querySelectorAll('.charLi').forEach(li => {
       if (li.textContent === ' ') {
@@ -207,36 +244,19 @@ function Home() {
       , document.querySelector("#portal"))
   }
 
-  const charMatchCount = () => {
-    return areaRef.current.value.split('').filter((char, i) => { return char === displayText[i] }).length
-  }
-
-  const calculateScore = () => {
-    const wordCount = (areaRef.current.value.match(/\s/g) || []).length;
-    const completionPercentage = Math.round((charMatchCount() / displayText.length) * 100);
-    const accuracy = Math.round((charMatchCount() / areaRef.current.value.length) * 100)
-
-    switch (difficulty) {
-      case 'Medium':
-        return [Math.round(wordCount / 2) + 1, accuracy, completionPercentage]
-      case 'Hard':
-        return [Math.round(wordCount / 3) + 1, accuracy, completionPercentage]
-      default:
-        return [Math.round(wordCount) + 1, accuracy, completionPercentage]
-    }
-  }
-
   const handleKeyDown = (e) => {
     if (e.currentTarget.value.length > 0) {
       if (e.key !== 'Backspace') {
         if (calculateLineCount(e.currentTarget.value.length) === 0) {
           document.body.querySelector('.char_table').style.top =
-            parseFloat(document.body.querySelector('.char_table').style.top.split('ch')[0]) - 1.2 + 'ch'
+            parseFloat(document.body.querySelector('.char_table').style.top.split('ch')[0]) - 1.35 + 'ch'
         }
       } else {
+        // backspaced
+        setCurrentIndex(currentIndex => currentIndex - 1)
         if (calculateLineCount(e.currentTarget.value.length) === 1) {
           document.body.querySelector('.char_table').style.top =
-            parseFloat(document.body.querySelector('.char_table').style.top.split('ch')[0]) + 1.2 + 'ch'
+            parseFloat(document.body.querySelector('.char_table').style.top.split('ch')[0]) + 1.35 + 'ch'
         }
       }
     }

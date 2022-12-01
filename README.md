@@ -5,7 +5,7 @@ This is an open source project from [DevProjects](http://www.codementor.io/proje
 Find the project requirements here: [Speed typing game](https://www.codementor.io/projects/web/speed-typing-game-c51led1afn)
 
 ## Tech/framework used
-Built with ReactJS and Vite
+Built with ReactJS and NextJS
 
 ## Screenshots and demo
 [https://effortless-croquembouche-3b8bed.netlify.app/](https://effortless-croquembouche-3b8bed.netlify.app/)
@@ -13,7 +13,7 @@ Built with ReactJS and Vite
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Type Runner is speed typing game made with React and Vite.js. Hosted to Firebase.
+Type Runner is speed typing game made with React and Next.js. Hosted to Netlify with Next.js Runtime Version 4 (v4.27.3) installed.
 
 ### Prerequisites
 

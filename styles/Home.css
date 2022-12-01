@@ -1,7 +1,19 @@
+@keyframes blink {
+  0% {
+    background-color: transparent;
+  } 
+  50% {
+    background-color: #f5f5f573;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
 #App {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 6vh 2rem;
   text-align: center;
 }
 
@@ -24,17 +36,16 @@
 
 .modal {
   position: relative;
-  border: 1px solid #ffeb3b;
-  border-radius: 2.5ch;
   padding: 2rem 5rem 25px 2rem;
   background: #fff;
+  font-size: 2.3ch;
   text-align: left;
   color: #242424;
   scale: 1.2;
 }
 
 .modal_title {
-  margin: 10px 0px;
+  margin: 20px 0px;
   color: #e5e5e5;
 }
 
@@ -110,6 +121,7 @@
 
 .result_button {
   margin: 25px auto;
+  width: 250px;
   display: block;
   cursor: pointer;
   text-decoration: underline;
@@ -177,6 +189,10 @@
   min-width: 6px;
   text-align: center;
 }
+.current {
+  animation: 0.4s linear 0s infinite running blink;
+  outline: 1px solid #f5f5f573;
+}
 
 .areaText {
   background: #111;
@@ -196,6 +212,11 @@
   width: 100%;
   resize: none;
   height: 260px;
+  transition: color 0.2s ease-in-out;
+}
+
+.areaText::placeholder {
+  animation: 0.3s linear 0s infinite running blink;
 }
 
 .areaText::selection {
