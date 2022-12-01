@@ -62,4 +62,4 @@ See the [open issues](https://github.com/gitmohamed/type-runner/issues) for a fu
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-[product-screenshot]: ./public/type_runner.gif
+[product-screenshot]: https://i.imgur.com/uXrxJtR.gifv
