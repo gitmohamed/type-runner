@@ -8,7 +8,7 @@ Find the project requirements here: [Speed typing game](https://www.codementor.i
 Built with ReactJS and NextJS
 
 ## Screenshots and demo
-[https://effortless-croquembouche-3b8bed.netlify.app/](https://effortless-croquembouche-3b8bed.netlify.app/)
+[![Type Runner Demo][type-runner]](https://effortless-croquembouche-3b8bed.netlify.app/)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -61,3 +61,5 @@ _To install/clone this app follow the steps below._
 See the [open issues](https://github.com/gitmohamed/type-runner/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+[product-screenshot]: ./public/type_runner.gif
