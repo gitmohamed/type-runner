@@ -21,7 +21,7 @@
   display: none;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   background: rgba(0,0,0,0.8);
@@ -211,12 +211,12 @@
   appearance: none;
   width: 100%;
   resize: none;
-  height: 260px;
+  height: 26vh;
   transition: color 0.2s ease-in-out;
 }
 
 .areaText::placeholder {
-  animation: 0.3s linear 0s infinite running blink;
+  /* animation: 0.3s linear 0s infinite running blink; */
 }
 
 .areaText::selection {
@@ -309,12 +309,12 @@
     margin: 8px auto;
     text-align: center;
     width: 15rem;
-    padding: 0.7rem 1.5rem;
+    padding: 0.7rem 0.9rem;
   }
 
   .checkmark {
-    top: 15px;
-    left: 11px;
+    top: 12px;
+    left: 9px;
     height: 16px;
     width: 16px;
   }
@@ -324,12 +324,14 @@
     left: 4.2px;
   }
   .difficulty_form {
-    flex-direction: column;
+    /* flex-direction: column; */
+    gap: 7px;
   }
 }
 
 @media screen and (max-width: 900px) {
   .diff_option {
-    width: 70%;
+    font-size: 0.8rem;
+    width: 33.3%;
   }
 }

@@ -56,7 +56,7 @@ _To install/clone this app follow the steps below._
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Separate out component methods in to separate files
+- [ ] Separate out component methods into separate files
 - [ ] Word wrap display text
 
 
