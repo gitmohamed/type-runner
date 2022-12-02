@@ -188,6 +188,11 @@
   display: inline-block;
   min-width: 6px;
   text-align: center;
+  /* hardware acceleration */
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 .current {
   animation: 0.4s linear 0s infinite running blink;
