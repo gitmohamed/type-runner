@@ -19,7 +19,7 @@ function Home() {
 
   const checkAgainstSampleText = (text) => {
     if (text === '') return;
-    let beginIndex = 0, endIndex = displayText.length;
+    let beginIndex = 0, endIndex = text.length;
     while (beginIndex < endIndex) {
       // console.log(text[beginIndex], displayText[beginIndex]);
       // check string indicies for mismatch
