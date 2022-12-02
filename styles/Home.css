@@ -310,22 +310,32 @@
   #root {
     padding: 1rem;
   }
+}
 
+@media screen and (max-width: 900px) {
+  .diff_option {
+    font-size: 0.8rem;
+    width: 33.3%;
+  }
   .diff_option {
     margin: 8px auto;
     text-align: center;
     width: 15rem;
-    padding: 0.7rem 0.9rem;
+    padding: 0.7rem 0rem;
+  }
+  .diff_option input {
+    appearance: revert;
+    -webkit-appearance: revert;
+    -moz-appearance: revert;
   }
 
   .checkmark {
-    top: 12px;
+    display: none;
+    /* top: 12px;
     left: 9px;
     height: 16px;
-    width: 16px;
-    position: absolute;
+    width: 16px; */
   }
-
   .checkmark:after {
     top: 4.2px;
     left: 4.2px;
@@ -333,12 +343,5 @@
   .difficulty_form {
     /* flex-direction: column; */
     gap: 7px;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .diff_option {
-    font-size: 0.8rem;
-    width: 33.3%;
   }
 }
