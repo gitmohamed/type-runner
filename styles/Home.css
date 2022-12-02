@@ -323,6 +323,7 @@
     left: 9px;
     height: 16px;
     width: 16px;
+    position: absolute;
   }
 
   .checkmark:after {
