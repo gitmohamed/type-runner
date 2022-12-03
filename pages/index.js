@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
+import ReactDOM from 'react-dom'
 
 import Head from 'next/head'
 // components
 import Watch from './components/Watch'
-import Score from './components/Score'
+// import Score from './components/Score'
 import Loader from './components/Loader'
 import Reset from './components/Reset'
 import Difficulty from './components/Difficulty'
@@ -176,6 +177,30 @@ function Home() {
       li.style.color = 'rgba(255, 255, 255, 0.5)'
     })
   }
+  
+const Score = () => {
+  const modalRef = useRef();
+  const closeModal = (e) => {
+      if (e.currentTarget === modalRef.current) {
+          setShowModal(false);
+          document.querySelector("#portal").style.display = 'none'
+      }
+  };
+  return ReactDOM.createPortal(
+      <div className={'container'} ref={modalRef} onClick={closeModal}>
+          <div className={'modal'}>
+              <button onClick={() => setShowModal(false)}>
+              <i />
+              <i />
+              </button>
+              <h2>Results:</h2>
+              Words per minute: <b style={{color: '#673ab7'}}>{score[0]}</b> <br />
+              Accuracy: <b style={{color: score[1] > 90 ? '#14bf1b' : '#ff9800'}}>{score[1]}% </b><br />
+              Total Accuracy: <b style={{color: score[2] > 55 ? '#14bf1b' : '#ff9800'}}>{score[2]}% </b><br />
+          </div>
+      </div>
+      , document.querySelector("#portal"))
+}
 
   const handleKeyDown = (e) => {
     if (e.currentTarget.value.length > 1) {
