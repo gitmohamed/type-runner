@@ -1,8 +1,13 @@
 import { useState, useRef, useEffect } from 'react'
-import ReactDOM from 'react-dom'
-import loader from '../public/loader.svg'
+
 import Head from 'next/head'
-import Image from 'next/image'
+// components
+import Watch from './components/Watch'
+import Score from './components/Score'
+import Loader from './components/Loader'
+import Reset from './components/Reset'
+import Difficulty from './components/Difficulty'
+import ResultsToggle from './components/ResultsToggle'
 
 function Home() {
   const [displayText, setDisplayText] = useState('')
@@ -10,7 +15,6 @@ function Home() {
   const [timeInterval, setTimerInterval] = useState(0)
   const [timer, setTimer] = useState(60000) // now
   const [watch, setWatch] = useState('00 : 60')
-  const [currentIndex, setCurrentIndex] = useState(0)
   const [difficulty, setDifficulty] = useState('Easy')
   const [showModal, setShowModal] = useState(false)
   const [score, setScore] = useState([0, 0, 0])
@@ -86,17 +90,9 @@ function Home() {
     return textCount % 111;
   }
 
-  const Watch = () => {
-    return <h1 className={'modal_title'}>{watch}</h1>
-  }
-
   const splitText = (text) => {
     return text.split('');
   }
-
-  useEffect(() => {
-    // console.log(currentIndex)
-  }, [currentIndex])
 
   const startTimer = () => {
     // create timer interval[timeInterval] and start timer
@@ -105,7 +101,12 @@ function Home() {
       setTimer(timer => timer - 1000)
     }, 1000)
     setTimerInterval(time)
-  };
+  }
+
+  // on mount
+  useEffect(() => {
+    changeDifficulty('Easy')
+  }, [])
 
   useEffect(() => {
     GenerateParagraph(difficulty === 'Easy' ? 2 : difficulty === 'Hard' ? 4 : 3)
@@ -146,41 +147,27 @@ function Home() {
     setWatch(`0${Math.floor(timer / 1000 / 60) % 60} : ${Math.floor(timer / 1000) % 60 < 10 ? '0' : ''}${Math.floor(timer / 1000) % 60}`)
   }, [timer, timeInterval])
 
-  const Reset = () => {
-    const resetHandler = () => {
-      // if timer is full do not reset
-      if (timer === 60000 || timer === 120000 || timer === 180000) return;
-      areaRef.current.disabled = false
-      changeDifficulty(difficulty) // reset timer
-      areaRef.current.value = '';
-    }
-    return <button className={'reset_button'} disabled={timerStarted ? "disabled" : false} onClick={resetHandler}>Reset</button>
-  }
 
   const changeDifficulty = async (diff) => {
     switch (diff) {
       case 'Hard':
         setTimer(180000)
         setDifficulty('Hard')
-        GenerateParagraph(4)
         break;
       case 'Medium':
         setTimer(120000)
         setDifficulty('Medium')
-        GenerateParagraph(3)
         break;
 
       default:
         setTimer(60000)
         setDifficulty('Easy')
-        GenerateParagraph(2)
         break;
     }
     areaRef.current.disabled = false
     areaRef.current.value = '';
     areaRef.current.focus();
     setScore([0, 0])
-    setCurrentIndex(0)
     document.querySelector('.char_table').style.top = '0ch'
     document.querySelectorAll('.charLi').forEach(li => {
       if (li.textContent === ' ') {
@@ -190,62 +177,8 @@ function Home() {
     })
   }
 
-  const Difficulty = () => {
-    const changeHandler = (e) => {
-      changeDifficulty(e.currentTarget.value)
-    }
-
-    return <form className={'difficulty_form'}>
-      <label className={'diff_option'}><input type="checkbox" 
-        disabled={timerStarted ? "disabled" : false} 
-        checked={difficulty === 'Easy'} 
-        onChange={changeHandler} value="Easy" name="difficulty" />
-        <span className={'checkmark'}></span>
-          Easy
-      </label>
-      <label className={'diff_option'}><input type="checkbox" 
-        disabled={timerStarted ? "disabled" : false} 
-        checked={difficulty === 'Medium'} 
-        onChange={changeHandler} value="Medium" name="difficulty" />
-        <span className={'checkmark'}></span>
-          Medium
-      </label>
-      <label className={'diff_option'}><input type="checkbox" 
-        disabled={timerStarted ? "disabled" : false} 
-        checked={difficulty === 'Hard'} 
-        onChange={changeHandler} value="Hard" name="difficulty" />
-        <span className={'checkmark'}></span>
-          Hard
-      </label>
-    </form>
-  }
-
-  const Score = () => {
-    const modalRef = useRef();
-    const closeModal = (e) => {
-      if (e.currentTarget === modalRef.current) {
-        setShowModal(false);
-        document.querySelector("#portal").style.display = 'none'
-      }
-    };
-    return ReactDOM.createPortal(
-      <div className={'container'} ref={modalRef} onClick={closeModal}>
-        <div className={'modal'}>
-          <button onClick={() => setShowModal(false)}>
-            <i />
-            <i />
-          </button>
-          <h2>Results:</h2>
-          Words per minute: <b style={{color: '#673ab7'}}>{score[0]}</b> <br />
-          Accuracy: <b style={{color: score[1] > 90 ? '#14bf1b' : '#ff9800'}}>{score[1]}% </b><br />
-          Total Accuracy: <b style={{color: score[2] > 55 ? '#14bf1b' : '#ff9800'}}>{score[2]}% </b><br />
-        </div>
-      </div>
-      , document.querySelector("#portal"))
-  }
-
   const handleKeyDown = (e) => {
-    if (e.currentTarget.value.length > 0) {
+    if (e.currentTarget.value.length > 1) {
       if (e.key !== 'Backspace') {
         if (calculateLineCount(e.currentTarget.value.length) === 0) {
           document.body.querySelector('.char_table').style.top =
@@ -253,7 +186,6 @@ function Home() {
         }
       } else {
         // backspaced
-        setCurrentIndex(currentIndex => currentIndex - 1)
         if (calculateLineCount(e.currentTarget.value.length) === 1) {
           document.body.querySelector('.char_table').style.top =
             parseFloat(document.body.querySelector('.char_table').style.top.split('ch')[0]) + 1.35 + 'ch'
@@ -262,24 +194,13 @@ function Home() {
     }
   }
 
-  const ResultsToggle = () => {
-    const toggleResults = (e) => {
-      document.body.querySelector("#portal").style.display = 'flex'
-      setShowModal(true)
-    }
-    return <a className='result_button' onClick={toggleResults}>Results</a>
-  }
-
-  const Loader = () => {
-    return <Image src={loader} alt="loading" id='loading' />
-  }
 
   return (
     <div id={'App'}>
-      <Difficulty />
-      <Watch />
-      <Reset />
-      {!showModal && score[0] !== 0 && <ResultsToggle />}
+      <Difficulty difficulty={difficulty} timerStarted={timerStarted} changeDifficulty={changeDifficulty} />
+      <Watch currentTime={watch} />
+      <Reset timerStarted={timerStarted} timer={timer} areaRef={areaRef} changeDifficulty={changeDifficulty} difficulty={difficulty} />
+      {!showModal && score[0] !== 0 && <ResultsToggle setShowModal={setShowModal} />}
       <br />
       <br />
       <form className={'type_form'} action="#" onClick={(e) => areaRef.current.focus()}>
@@ -294,7 +215,7 @@ function Home() {
           checkAgainstSampleText(e.currentTarget.value);
         }}></textarea>
       </form>
-      {showModal ? <Score /> : null}
+      {showModal ? <Score setShowModal={setShowModal} currentScore={score} /> : null}
       <div id='portal'></div>
     </div>
   )

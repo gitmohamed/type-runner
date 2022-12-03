@@ -34,6 +34,11 @@
   display: grid;
 }
 
+#loading {
+  outline: 0;
+  border: 0;
+}
+
 .modal {
   position: relative;
   padding: 2rem 5rem 25px 2rem;
@@ -79,11 +84,10 @@
 
 .modal button i:nth-child(1) {
   rotate: 45deg;
-  
 }
 .modal button i:nth-child(2) {
   rotate: -45deg;
-
+  translate: -1px;
 }
 
 .modal button:hover {
