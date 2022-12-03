@@ -1,6 +1,6 @@
 import { Readable } from 'stream';
 import randy from 'randy';
-import { phrases } from './utils/phrases'
+import phrases from './utils/phrases'
 import makeSentenceFromTemplate from './utils/makeSentenceFromTemplate'
 
 function handler(req, res) {
