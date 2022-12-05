@@ -109,10 +109,6 @@ function Home() {
     changeDifficulty('Easy')
   }, [])
 
-  useEffect(() => {
-    GenerateParagraph(difficulty === 'Easy' ? 2 : difficulty === 'Hard' ? 4 : 3)
-  }, [difficulty])
-
   // watch tick - every 1000ms
   useEffect(() => {
     const charMatchCount = () => {
@@ -154,15 +150,18 @@ function Home() {
       case 'Hard':
         setTimer(180000)
         setDifficulty('Hard')
+        GenerateParagraph(4)
         break;
       case 'Medium':
         setTimer(120000)
         setDifficulty('Medium')
+        GenerateParagraph(3)
         break;
 
       default:
         setTimer(60000)
         setDifficulty('Easy')
+        GenerateParagraph(2)
         break;
     }
     areaRef.current.disabled = false
