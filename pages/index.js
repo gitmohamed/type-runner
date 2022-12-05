@@ -26,7 +26,6 @@ function Home() {
     if (text === '') return;
     let beginIndex = 0, endIndex = text.length;
     while (beginIndex < endIndex) {
-      // console.log(text[beginIndex], displayText[beginIndex]);
       // check string indicies for mismatch
       // color the index background *GREEN for a match & *RED for mismatch
       if (displayText[beginIndex] === text[beginIndex]) {
@@ -65,10 +64,6 @@ function Home() {
       li.classList.remove("current")
     });
     document.querySelector(`.charLi[value='${areaRef.current.value.length}']`).classList.add("current");
-    // document.querySelector(`.charLi[value='${areaRef.current.value.length}']`).animate(
-    //   { backgroundColor: ['rgba(255, 255, 255, 0.6)', 'transparent'] }, 
-    //   { duration: 150, fill: "forwards", iterations: 5 })
-    // document.querySelector(`.charLi[value='${currentIndex}']`).classList.add('current')
   }
 
   const GenerateParagraph = async (paragraphCount) => {
