@@ -25,7 +25,7 @@ function Home() {
   const checkAgainstSampleText = (text) => {
     if (text === '') return;
     let beginIndex = 0, endIndex = text.length;
-    while (beginIndex < endIndex) {
+    while (beginIndex < endIndex + 1) {
       // check string indicies for mismatch
       // color the index background *GREEN for a match & *RED for mismatch
       if (displayText[beginIndex] === text[beginIndex]) {
