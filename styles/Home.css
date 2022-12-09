@@ -227,10 +227,6 @@
   transition: color 0.2s ease-in-out;
 }
 
-.areaText::placeholder {
-  /* animation: 0.3s linear 0s infinite running blink; */
-}
-
 .areaText::selection {
   background: aquamarine;
   color: #212121;

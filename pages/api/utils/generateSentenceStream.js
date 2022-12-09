@@ -1,4 +1,4 @@
-import phrases from './phrases'
+import phrases from '../data/phrases'
 import makeSentenceFromTemplate from './makeSentenceFromTemplate'
 import randy from 'randy';
 
