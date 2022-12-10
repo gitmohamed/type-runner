@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
@@ -16,6 +17,7 @@
     "express": "3.2.0",
     "express-session": "^1.17.3",
     "fs": "^0.0.1-security",
+    "jest": "^29.3.1",
     "less-middleware": "2.0.1",
     "lodash": "2.4.1",
     "next": "13.0.5",
