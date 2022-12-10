@@ -1,5 +1,5 @@
 
-import makeSentenceFromTemplate from './utils/makeSentenceFromTemplate'
+import makeSentenceFromTemplate from './makeSentenceFromTemplate'
 
 export default function generate(numberOfSentences) {
     var sentences = "";
