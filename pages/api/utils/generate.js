@@ -1,4 +1,6 @@
 
+import makeSentenceFromTemplate from './utils/makeSentenceFromTemplate'
+
 export default function generate(numberOfSentences) {
     var sentences = "";
     for(var i = 0; i < numberOfSentences; i++) {
