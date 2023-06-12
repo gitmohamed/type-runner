@@ -235,9 +235,11 @@
 }
 
 .diff_option {
-  padding: 1.1rem 2.5rem;
-  border-radius: 2rem;
+  padding: 1.1rem 4.5vw;
+  border-radius: 4rem;
+  line-height: 1.8rem;
   margin: 11px;
+  color: #bbbbbb;
   border: 1px solid #6e6e6e;
   cursor: pointer;
   text-align: right;
