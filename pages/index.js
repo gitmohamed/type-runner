@@ -1,7 +1,9 @@
-import Game from './game'
 
 import Head from 'next/head'
 // components
+import { useState, useRef, useEffect } from 'react'
+import ReactDOM from 'react-dom'
+import Game from './game'
 
 function Home() {
   return (

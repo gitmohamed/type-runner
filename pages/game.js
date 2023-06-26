@@ -18,7 +18,6 @@ const Game = () => {
     const [showModal, setShowModal] = useState(false)
     const [score, setScore] = useState([0, 0, 0])
     const areaRef = useRef(null)
-    const [correctWords, setCorrectWords] = useState(0)
   
     const Score = () => {
         const modalRef = useRef();
@@ -213,7 +212,7 @@ const handleKeyDown = (e) => {
             <form className={'type_form'} action="#" onClick={(e) => areaRef.current.focus()}>
                 <ul className={'char_table'} style={{ top: '0ch' }}>
                     {isLoading ? <Loader /> : displayText.split('').map((char, i) => {
-                        return <li className={`charLi ${i === 0 ? "current" : null}`} key={`${char}-${i}`} value={i}>{char}</li>
+                        return <li className={`charLi ${i === 0 ? "current" : ""}`} key={`${char}-${i}`} value={i}>{char}</li>
                     })}
                 </ul>
                 <textarea ref={areaRef} name="areaText" className={'areaText'} cols="30" rows="10" placeholder='<--- Begin by typing here' 
