@@ -2,6 +2,7 @@ const Reset = ({ timerStarted, timer, areaRef, changeDifficulty, difficulty }) =
     const resetHandler = () => {
         // if timer is full do not reset
         if (timer === 60000 || timer === 120000 || timer === 180000) return;
+        document.querySelector('.char_table').style.left = '0ch'
         areaRef.current.disabled = false
         changeDifficulty(difficulty) // reset timer
         areaRef.current.value = '';

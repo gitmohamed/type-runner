@@ -129,6 +129,8 @@ html {
 }
 
 .result_button {
+  color: whitesmoke;
+  background: transparent;
   margin: 25px auto;
   width: 250px;
   display: block;
@@ -175,7 +177,6 @@ html {
   font-size: 16px;
   /* width: 950px; */
   height: auto;
-  box-shadow: inset 0px -20ch 2rem -3rem #242424;
   position: relative;
 }
 
@@ -183,12 +184,11 @@ html {
   position: absolute;
   display: flex;
   gap: 0.5ch 0;
-  padding-top: 1rem;
   z-index: 0;
   font-size: 3ch;
   flex-direction: row;
-  flex-wrap: wrap;
-  transition: top 0.3s ease-in-out;
+  flex-wrap: nowrap;
+  transition: left 0.3s cubic-bezier(0, 0.73, 0.96, 0.95);
 }
 
 .charLi {
@@ -199,11 +199,6 @@ html {
   text-align: center;
   border-left: 1px solid transparent;
   will-change: color, border-color;
-  /* hardware acceleration */
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
 }
 .current {
   animation: 0.4s linear 0s infinite running blink;

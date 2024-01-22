@@ -133,7 +133,7 @@ const Game = () => {
     areaRef.current.value = '';
     areaRef.current.focus();
     setScore([0, 0])
-    document.querySelector('.char_table').style.top = '0ch'
+    document.querySelector('.char_table').style.left = document.querySelector('.type_form').offsetWidth/2 + 'px'
     document.querySelectorAll('.charLi').forEach(li => {
       if (li.textContent === ' ') {
         li.style.backgroundColor = 'transparent'
@@ -172,10 +172,10 @@ const checkAgainstSampleText = (text) => {
         }
         beginIndex++;
     }
-    document.querySelectorAll(`.charLi:not([value='${areaRef.current.value.length}'])`).forEach(li => {
+    document.querySelectorAll(`.charLi:not([value='${areaRef.current.selectionEnd}'])`).forEach(li => {
         li.classList.remove("current")
     });
-    document.querySelector(`.charLi[value='${areaRef.current.value.length}']`).classList.add("current");
+    document.querySelector(`.charLi[value='${areaRef.current.selectionEnd}']`).classList.add("current");
 }
 
 const calculateLineCount = (textCount) => {
@@ -183,19 +183,24 @@ const calculateLineCount = (textCount) => {
 }
 
 const handleKeyDown = (e) => {
-    if (e.currentTarget.value.length > 1) {
-        if (e.key !== 'Backspace') {
-            if (calculateLineCount(e.currentTarget.value.length) === 0) {
-                document.body.querySelector('.char_table').style.top =
-                parseFloat(document.body.querySelector('.char_table').style.top.split('ch')[0]) - 1.35 + 'ch'
-            }
-        } else {
-        // backspaced
-            if (calculateLineCount(e.currentTarget.value.length) === 1) {
-                document.body.querySelector('.char_table').style.top =
-                parseFloat(document.body.querySelector('.char_table').style.top.split('ch')[0]) + 1.35 + 'ch'
-            }
+    if (e.currentTarget.value.length >= 0 && areaRef.current.selectionEnd > 0) {
+      if(e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        console.log(areaRef.current.selectionEnd);
+        document.querySelectorAll(`.charLi:not([value='${areaRef.current.selectionEnd}'])`).forEach(li => {
+          li.classList.remove("current")
+        });
+        document.querySelector(`.charLi[value='${areaRef.current.selectionStart}']`).classList.add("current");
+      }
+      if (e.key !== 'Backspace') {
+        if(e.key.length === 1) { // if valid letter character - will return 1 for length
+          document.body.querySelector('.char_table').style.left =
+          parseFloat(document.body.querySelector('.char_table').style.left.split('px')[0]) -  document.querySelector(`.char_table li:nth-of-type(${areaRef.current.value.length + 1})`).clientWidth - 0.9 + 'px'
         }
+      } else {
+      // backspaced
+        document.body.querySelector('.char_table').style.left =
+        parseFloat(document.body.querySelector('.char_table').style.left.split('px')[0]) +  document.querySelector(`.char_table li:nth-of-type(${areaRef.current.value.length})`).clientWidth - 0.9 + 'px'
+      }
     }
 }
 
@@ -209,14 +214,22 @@ const handleKeyDown = (e) => {
             {!showModal && score[0] !== 0 && <ResultsToggle setShowModal={setShowModal} />}
             <br />
             <br />
+            <br />
             <form className={'type_form'} action="#" onClick={(e) => areaRef.current.focus()}>
-                <ul className={'char_table'} style={{ top: '0ch' }}>
+                <ul className={'char_table'}>
                     {isLoading ? <Loader /> : displayText.split('').map((char, i) => {
                         return <li className={`charLi ${i === 0 ? "current" : ""}`} key={`${char}-${i}`} value={i}>{char}</li>
                     })}
                 </ul>
                 <textarea ref={areaRef} name="areaText" className={'areaText'} cols="30" rows="10" placeholder='<--- Begin by typing here' 
-                    onKeyDown={handleKeyDown} onChange={(e) => {
+                    onKeyDown={handleKeyDown}
+                    onClick={(e) => {
+                      document.querySelectorAll(`.charLi:not([value='${e.currentTarget.selectionEnd}'])`).forEach(li => {
+                        li.classList.remove("current")
+                      });
+                      document.querySelector(`.charLi[value='${e.currentTarget.selectionEnd}']`).classList.add("current");
+                    }} 
+                    onChange={(e) => {
                         if (!timerStarted) startTimer();
                             checkAgainstSampleText(e.currentTarget.value);
                 }}></textarea>
