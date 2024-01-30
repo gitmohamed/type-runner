@@ -183,61 +183,80 @@ const calculateLineCount = (textCount) => {
 }
 
 const handleKeyDown = (e) => {
-    if (e.currentTarget.value.length >= 0 && areaRef.current.selectionEnd > 0) {
-      if(e.key === "ArrowRight" || e.key === "ArrowLeft") {
-        console.log(areaRef.current.selectionEnd);
+  if (e.currentTarget.value.length >= 0 && areaRef.current.selectionEnd > 0) {
+    if(e.key === "ArrowLeft") {
+      document.querySelectorAll(`.charLi:not([value='${areaRef.current.selectionEnd - 1}'])`).forEach(li => {
+        li.classList.remove("current")
+      });
+      document.querySelector(`.charLi[value='${areaRef.current.selectionStart - 1}']`).classList.add("current");
+      if(areaRef.current.selectionEnd > document.querySelector('.current').value) {
+        document.body.querySelector('.char_table').style.left =
+        parseFloat(document.body.querySelector('.char_table').style.left.split('px')[0]) + document.querySelector(`.char_table li:nth-of-type(${areaRef.current.value.length - 1})`).clientWidth - 0.9 + 'px'
+      }
+    } else if (e.key === "ArrowRight") {
+      if(areaRef.current.selectionEnd > document.querySelector('.current').value) {
+        document.querySelectorAll(`.charLi:not([value='${areaRef.current.selectionEnd + 1}'])`).forEach(li => {
+          li.classList.remove("current")
+        });
+        document.querySelector(`.charLi[value='${areaRef.current.selectionStart + 1}']`).classList.add("current");
+        document.body.querySelector('.char_table').style.left =
+        parseFloat(document.body.querySelector('.char_table').style.left.split('px')[0]) - document.querySelector(`.char_table li:nth-of-type(${areaRef.current.value.length + 1})`).clientWidth - 0.9 + 'px'
+      } else {
         document.querySelectorAll(`.charLi:not([value='${areaRef.current.selectionEnd}'])`).forEach(li => {
           li.classList.remove("current")
         });
         document.querySelector(`.charLi[value='${areaRef.current.selectionStart}']`).classList.add("current");
       }
-      if (e.key !== 'Backspace') {
-        if(e.key.length === 1) { // if valid letter character - will return 1 for length
-          document.body.querySelector('.char_table').style.left =
-          parseFloat(document.body.querySelector('.char_table').style.left.split('px')[0]) -  document.querySelector(`.char_table li:nth-of-type(${areaRef.current.value.length + 1})`).clientWidth - 0.9 + 'px'
-        }
-      } else {
-      // backspaced
-        document.body.querySelector('.char_table').style.left =
-        parseFloat(document.body.querySelector('.char_table').style.left.split('px')[0]) +  document.querySelector(`.char_table li:nth-of-type(${areaRef.current.value.length})`).clientWidth - 0.9 + 'px'
-      }
     }
+    if (e.key !== 'Backspace') {
+      if(e.key.length === 1) { // if valid letter character - will return 1 for length
+        document.body.querySelector('.char_table').style.left =
+        parseFloat(document.body.querySelector('.char_table').style.left.split('px')[0]) - document.querySelector(`.char_table li:nth-of-type(${areaRef.current.value.length + 1})`).clientWidth - 0.9 + 'px'
+      }
+    } else {
+    // backspaced
+      document.body.querySelector('.char_table').style.left =
+      parseFloat(document.body.querySelector('.char_table').style.left.split('px')[0]) + document.querySelector(`.char_table li:nth-of-type(${areaRef.current.value.length})`).clientWidth - 0.9 + 'px'
+    }
+  }
 }
-
-    
-
-    return (
-        <div className={'game'}>
-            <Difficulty difficulty={difficulty} timerStarted={timerStarted} changeDifficulty={changeDifficulty} />
-            <Watch currentTime={watch} />
-            <Reset timerStarted={timerStarted} timer={timer} areaRef={areaRef} changeDifficulty={changeDifficulty} difficulty={difficulty} />
-            {!showModal && score[0] !== 0 && <ResultsToggle setShowModal={setShowModal} />}
-            <br />
-            <br />
-            <br />
-            <form className={'type_form'} action="#" onClick={(e) => areaRef.current.focus()}>
-                <ul className={'char_table'}>
-                    {isLoading ? <Loader /> : displayText.split('').map((char, i) => {
-                        return <li className={`charLi ${i === 0 ? "current" : ""}`} key={`${char}-${i}`} value={i}>{char}</li>
-                    })}
-                </ul>
-                <textarea ref={areaRef} name="areaText" className={'areaText'} cols="30" rows="10" placeholder='<--- Begin by typing here' 
-                    onKeyDown={handleKeyDown}
-                    onClick={(e) => {
-                      document.querySelectorAll(`.charLi:not([value='${e.currentTarget.selectionEnd}'])`).forEach(li => {
-                        li.classList.remove("current")
-                      });
-                      document.querySelector(`.charLi[value='${e.currentTarget.selectionEnd}']`).classList.add("current");
-                    }} 
-                    onChange={(e) => {
-                        if (!timerStarted) startTimer();
-                            checkAgainstSampleText(e.currentTarget.value);
-                }}></textarea>
-            </form>
-            {showModal ? <Score setShowModal={setShowModal} currentScore={score} /> : null}
-            <div id='portal'></div>
-        </div>
-    )
+  return (
+    <div className={'game'}>
+        <Difficulty difficulty={difficulty} timerStarted={timerStarted} changeDifficulty={changeDifficulty} />
+        <Watch currentTime={watch} />
+        <Reset timerStarted={timerStarted} timer={timer} areaRef={areaRef} changeDifficulty={changeDifficulty} difficulty={difficulty} />
+        {!showModal && score[0] !== 0 && <ResultsToggle setShowModal={setShowModal} />}
+        <br />
+        <br />
+        <br />
+        <form className={'type_form'} action="#" onClick={(e) => areaRef.current.focus()}>
+            <ul className={'char_table'}>
+                {isLoading ? <Loader /> : displayText.split('').map((char, i) => {
+                    return <li className={`charLi ${i === 0 ? "current" : ""}`} key={`${char}-${i}`} value={i}>{char}</li>
+                })}
+            </ul>
+            <textarea ref={areaRef} name="areaText" className={'areaText'} cols="30" rows="10" placeholder='<--- Begin by typing here' 
+                onKeyDown={handleKeyDown}
+                onClick={(e) => {
+                  document.querySelectorAll(`.charLi:not([value='${e.currentTarget.selectionEnd}'])`).forEach(li => {
+                    li.classList.remove("current")
+                  });
+                  document.querySelector(`.charLi[value='${e.currentTarget.selectionEnd}']`).classList.add("current");
+                }} 
+                onBlur={(e) => {
+                  document.querySelectorAll(`.charLi`).forEach(li => {
+                    li.classList.remove("current")
+                  });
+                }}
+                onChange={(e) => {
+                    if (!timerStarted) startTimer();
+                        checkAgainstSampleText(e.currentTarget.value);
+            }}></textarea>
+        </form>
+        {showModal ? <Score setShowModal={setShowModal} currentScore={score} /> : null}
+        <div id='portal'></div>
+    </div>
+  )
 }
 
 export default Game

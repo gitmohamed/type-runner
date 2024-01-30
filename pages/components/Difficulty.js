@@ -9,21 +9,21 @@
         checked={difficulty === 'Easy'} 
         onChange={changeHandler} value="Easy" name="difficulty" />
         <span className={'checkmark'}></span>
-          Easy
+          1 minute
       </label>
       <label className={'diff_option'}><input type="checkbox" 
         disabled={timerStarted ? "disabled" : false} 
         checked={difficulty === 'Medium'} 
         onChange={changeHandler} value="Medium" name="difficulty" />
         <span className={'checkmark'}></span>
-          Medium
+          2 minutes
       </label>
       <label className={'diff_option'}><input type="checkbox" 
         disabled={timerStarted ? "disabled" : false} 
         checked={difficulty === 'Hard'} 
         onChange={changeHandler} value="Hard" name="difficulty" />
         <span className={'checkmark'}></span>
-          Hard
+          3 minutes
       </label>
     </form>
   }
